@@ -1,0 +1,1279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudyHub - Buy & Sell College Study Notes</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        :root {
+            --primary: #000000;
+            --primary-dark: #333333;
+            --secondary: #666666;
+            --light: #f8fafc;
+            --dark: #000000;
+            --success: #000000;
+            --warning: #000000;
+            --danger: #000000;
+            --gray: #94a3b8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            color: var(--dark);
+            background-color: #ffffff;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .navbar {
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+            background-color: white !important;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .navbar-scrolled {
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero-section {
+            background: #ffffff;
+            color: #000000;
+            padding: 6rem 0;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 1px solid #000000;
+        }
+
+        .search-bar {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        .feature-card {
+            transition: all 0.3s ease;
+            border: 1px solid #000000;
+            border-radius: 16px;
+            height: 100%;
+            background: white;
+            padding: 2rem;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .step-card {
+            position: relative;
+            border: 1px solid #000000;
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            background: white;
+            padding: 2rem;
+        }
+
+        .step-card:hover {
+            transform: scale(1.02);
+        }
+
+        .step-number {
+            position: absolute;
+            top: -20px;
+            left: 20px;
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .testimonial-card {
+            border: 1px solid #000000;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+            background: white;
+            padding: 2rem;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .pricing-card {
+            border-radius: 16px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #000000;
+            background: white;
+            padding: 2.5rem;
+        }
+
+        .pricing-card.popular {
+            transform: scale(1.05);
+            border: 2px solid var(--primary);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        .pricing-card.popular::before {
+            content: 'MOST POPULAR';
+            position: absolute;
+            top: 15px;
+            right: -30px;
+            background: var(--primary);
+            color: white;
+            padding: 5px 30px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            transform: rotate(45deg);
+        }
+
+        .faq-item {
+            border: 1px solid #000000;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            background: white;
+        }
+
+        .stats-card {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+            border: 1px solid #000000;
+            background: white;
+        }
+
+        .stats-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .category-card {
+            border-radius: 16px;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            height: 100%;
+            border: 1px solid #000000;
+            background: white;
+            padding: 1.5rem;
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-outline-light {
+            border-color: #000000;
+            color: #000000;
+            padding: 0.8rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline-light:hover {
+            background: #000000;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+        }
+
+        .section-title {
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: var(--dark);
+            font-size: 2.5rem;
+        }
+
+        .section-subtitle {
+            color: var(--secondary);
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .rating {
+            color: #000000;
+        }
+
+        footer {
+            background: var(--dark);
+            color: white;
+            padding-top: 4rem;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 0.5rem;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            text-decoration: none;
+        }
+
+        .social-icon:hover {
+            transform: translateY(-3px);
+            background: var(--primary);
+        }
+
+        .note-card {
+            border: 1px solid #000000;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            background: white;
+            height: 100%;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .note-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .price-tag {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #000000;
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .price-tag.paid {
+            background: #000000;
+        }
+
+        .download-btn {
+            background: #000000;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .download-btn:hover {
+            background: #333333;
+            transform: translateY(-2px);
+        }
+
+        .download-btn.paid {
+            background: #000000;
+        }
+
+        .download-btn.paid:hover {
+            background: #333333;
+        }
+
+        .btn-group .btn {
+            border-radius: 8px !important;
+            border: 1px solid #000000 !important;
+            color: #000000 !important;
+        }
+
+        .btn-group .btn:first-child {
+            border-top-left-radius: 8px !important;
+            border-bottom-left-radius: 8px !important;
+        }
+
+        .btn-group .btn:last-child {
+            border-top-right-radius: 8px !important;
+            border-bottom-right-radius: 8px !important;
+        }
+
+        .active-tab {
+            background: #000000 !important;
+            color: white !important;
+        }
+
+        .accordion-button:not(.collapsed) {
+            background: #000000;
+            color: white;
+        }
+
+        .accordion-button:focus {
+            box-shadow: none;
+        }
+
+        .bg-light {
+            background-color: #f1f5f9 !important;
+        }
+
+        .text-primary {
+            color: #000000 !important;
+        }
+
+        .text-secondary {
+            color: var(--secondary) !important;
+        }
+
+        .text-success {
+            color: #000000 !important;
+        }
+
+        .text-warning {
+            color: #000000 !important;
+        }
+
+        .border-primary {
+            border-color: #000000 !important;
+        }
+
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 3rem 0;
+            }
+
+            .pricing-card.popular {
+                transform: scale(1);
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        .badge {
+            padding: 0.5em 0.75em;
+        }
+
+        .card-img-top {
+            height: 180px;
+            object-fit: cover;
+        }
+
+        /* Modern black and white styling for how it works */
+        .step-card.modern {
+            background: #ffffff;
+            border: 1px solid #000000;
+            color: #000000;
+        }
+
+        .step-card.modern .step-number {
+            background: #000000;
+            color: #ffffff;
+        }
+
+        .step-card.modern:hover {
+            background: #000000;
+            color: #ffffff;
+            border-color: #000000;
+        }
+
+        .step-card.modern:hover .step-number {
+            background: #ffffff;
+            color: #000000;
+        }
+
+        .step-card.modern:hover i {
+            color: #000000 !important;
+        }
+
+        .step-card.modern i {
+            color: #000000 !important;
+        }
+
+        .bg-dark-circle {
+            background: #000000;
+        }
+
+        .text-dark {
+            color: #000000 !important;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold fs-3" href="#">
+                <i class="fas fa-book-open text-primary me-2"></i>StudyHub
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item mx-2">
+                        <a class="nav-link" href="#features">Features</a>
+                    </li>
+                    <li class="nav-item mx-2">
+                        <a class="nav-link" href="#how-it-works">How It
+                            Works</a>
+                    </li>
+                    <li class="nav-item mx-2">
+                        <a class="nav-link" href="#notes">Notes</a>
+                    </li>
+                    <li class="nav-item mx-2">
+                        <a class="nav-link" href="#testimonials">Testimonials</a>
+                    </li>
+                    <!-- <li class="nav-item mx-2">
+                            <a class="nav-link" href="#pricing">Pricing</a>
+                        </li> -->
+                    <!-- <li class="nav-item mx-2">
+                            <a class="btn btn-outline-primary" href="#">Sign
+                                In</a>
+                        </li> -->
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-5 mb-lg-0">
+                    <h1 class="display-3 fw-bold mb-4">Ace Your Exams with
+                        Premium Study Notes</h1>
+                    <p class="lead fs-4 mb-5">Join 50,000+ students who buy,
+                        sell, and download high-quality notes from top
+                        performers across universities.</p>
+                    <div class="d-flex flex-column flex-sm-row gap-3">
+                        <a href="#notes" class="btn btn-primary btn-lg">
+                            <i class="fas fa-download me-2"></i>Find Notes
+                        </a>
+                        <a href="#how-it-works" class="btn btn-outline-light btn-lg">
+                            <i class="fas fa-graduation-cap me-2"></i>Learn
+                            More
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="text-center">
+                        <img src="https://images.unsplash.com/photo-1523580494863-6f3031224c94?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&h=400&q=80"
+                            alt="Students studying" class="img-fluid rounded-4 shadow-lg">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Stats Section -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-6 mb-4">
+                    <div class="stats-card">
+                        <h2 class="fw-bold text-primary">50K+</h2>
+                        <p class="mb-0">Notes Available</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6 mb-4">
+                    <div class="stats-card">
+                        <h2 class="fw-bold text-primary">100+</h2>
+                        <p class="mb-0">Universities</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6 mb-4">
+                    <div class="stats-card">
+                        <h2 class="fw-bold text-primary">$250K+</h2>
+                        <p class="mb-0">Earned by Students</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6 mb-4">
+                    <div class="stats-card">
+                        <h2 class="fw-bold text-primary">98%</h2>
+                        <p class="mb-0">Satisfaction Rate</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Popular Categories -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title text-center">Popular Categories</h2>
+            <p class="section-subtitle text-center">Discover the most
+                sought-after study materials</p>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="category-card">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="bg-primary bg-opacity-10 p-3 rounded-circle me-3">
+                                <i class="fas fa-laptop-code fa-2x text-primary"></i>
+                            </div>
+                            <div>
+                                <h5 class="mb-0">Computer Science</h5>
+                                <p class="text-muted mb-0">15,000+ notes</p>
+                            </div>
+                        </div>
+                        <p class="mb-0">Algorithms, Data Structures, Machine
+                            Learning, and more</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="category-card">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="bg-success bg-opacity-10 p-3 rounded-circle me-3">
+                                <i class="fas fa-calculator fa-2x text-success"></i>
+                            </div>
+                            <div>
+                                <h5 class="mb-0">Mathematics</h5>
+                                <p class="text-muted mb-0">12,500+ notes</p>
+                            </div>
+                        </div>
+                        <p class="mb-0">Calculus, Statistics, Linear
+                            Algebra, and Differential Equations</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="category-card">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="bg-info bg-opacity-10 p-3 rounded-circle me-3">
+                                <i class="fas fa-flask fa-2x text-info"></i>
+                            </div>
+                            <div>
+                                <h5 class="mb-0">Biology</h5>
+                                <p class="text-muted mb-0">10,200+ notes</p>
+                            </div>
+                        </div>
+                        <p class="mb-0">Molecular Biology, Genetics,
+                            Physiology, and Biochemistry</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Features Section -->
+    <section id="features" class="py-5">
+        <div class="container">
+            <h2 class="section-title text-center">Why Students Love
+                StudyHub</h2>
+            <p class="section-subtitle text-center">Everything you need to
+                succeed in your studies</p>
+            <div class="row">
+                <div class="col-md-6 col-lg-3 mb-4">
+                    <div class="feature-card">
+                        <div class="bg-primary bg-opacity-10 p-3 rounded-circle d-inline-flex mb-4">
+                            <i class="fas fa-download fa-2x text-primary"></i>
+                        </div>
+                        <h5 class="card-title fw-bold">Instant Download</h5>
+                        <p class="card-text text-muted">Get access to notes
+                            immediately after purchase with no waiting
+                            time.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 mb-4">
+                    <div class="feature-card">
+                        <div class="bg-purple bg-opacity-10 p-3 rounded-circle d-inline-flex mb-4">
+                            <i class="fas fa-award fa-2x text-secondary"></i>
+                        </div>
+                        <h5 class="card-title fw-bold">Topper Curated</h5>
+                        <p class="card-text text-muted">All notes are
+                            created by academic toppers and verified for
+                            quality.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 mb-4">
+                    <div class="feature-card">
+                        <div class="bg-info bg-opacity-10 p-3 rounded-circle d-inline-flex mb-4">
+                            <i class="fas fa-search fa-2x text-info"></i>
+                        </div>
+                        <h5 class="card-title fw-bold">Easy Search</h5>
+                        <p class="card-text text-muted">Find exactly what
+                            you need with our advanced search filters.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 mb-4">
+                    <div class="feature-card">
+                        <div class="bg-success bg-opacity-10 p-3 rounded-circle d-inline-flex mb-4">
+                            <i class="fas fa-book-open fa-2x text-success"></i>
+                        </div>
+                        <h5 class="card-title fw-bold">Quality
+                            Guaranteed</h5>
+                        <p class="card-text text-muted">Every note goes
+                            through our quality check process before
+                            publishing.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- How It Works -->
+    <section id="how-it-works" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title text-center">How StudyHub Works</h2>
+            <p class="section-subtitle text-center">Simple steps to
+                success</p>
+            <div class="text-center mb-5">
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-outline-primary active-tab" id="buyers-tab"
+                        onclick="switchTab('buyers')">For
+                        Buyers</button>
+                    <button type="button" class="btn btn-outline-primary" id="sellers-tab"
+                        onclick="switchTab('sellers')">For
+                        Sellers</button>
+                </div>
+            </div>
+            <div id="buyers-content">
+                <div class="row">
+                    <div class="col-md-4 mb-4">
+                        <div class="step-card modern">
+                            <div class="step-number">1</div>
+                            <div class="text-center mb-3">
+                                <div class="bg-dark-circle bg-opacity-10 p-3 rounded-circle d-inline-flex">
+                                    <i class="fas fa-search fa-2x text-dark"></i>
+                                </div>
+                            </div>
+                            <h5 class="card-title text-center fw-bold">Search</h5>
+                            <p class="card-text text-center text-muted">Find
+                                notes by subject, course, or university</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="step-card modern">
+                            <div class="step-number">2</div>
+                            <div class="text-center mb-3">
+                                <div class="bg-dark-circle bg-opacity-10 p-3 rounded-circle d-inline-flex">
+                                    <i class="fas fa-eye fa-2x text-dark"></i>
+                                </div>
+                            </div>
+                            <h5 class="card-title text-center fw-bold">Preview</h5>
+                            <p class="card-text text-center text-muted">Check
+                                sample pages before purchasing</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="step-card modern">
+                            <div class="step-number">3</div>
+                            <div class="text-center mb-3">
+                                <div class="bg-dark-circle bg-opacity-10 p-3 rounded-circle d-inline-flex">
+                                    <i class="fas fa-download fa-2x text-dark"></i>
+                                </div>
+                            </div>
+                            <h5 class="card-title text-center fw-bold">Download</h5>
+                            <p class="card-text text-center text-muted">Get
+                                instant access to premium notes</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="sellers-content" style="display: none;">
+                <div class="row">
+                    <div class="col-md-4 mb-4">
+                        <div class="step-card modern">
+                            <div class="step-number">1</div>
+                            <div class="text-center mb-3">
+                                <div class="bg-dark-circle bg-opacity-10 p-3 rounded-circle d-inline-flex">
+                                    <i class="fas fa-file-upload fa-2x text-dark"></i>
+                                </div>
+                            </div>
+                            <h5 class="card-title text-center fw-bold">Upload</h5>
+                            <p class="card-text text-center text-muted">Share
+                                your high-quality study materials</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="step-card modern">
+                            <div class="step-number">2</div>
+                            <div class="text-center mb-3">
+                                <div class="bg-dark-circle bg-opacity-10 p-3 rounded-circle d-inline-flex">
+                                    <i class="fas fa-check-circle fa-2x text-dark"></i>
+                                </div>
+                            </div>
+                            <h5 class="card-title text-center fw-bold">Review</h5>
+                            <p class="card-text text-center text-muted">Our
+                                team verifies your content quality</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="step-card modern">
+                            <div class="step-number">3</div>
+                            <div class="text-center mb-3">
+                                <div class="bg-dark-circle bg-opacity-10 p-3 rounded-circle d-inline-flex">
+                                    <i class="fas fa-coins fa-2x text-dark"></i>
+                                </div>
+                            </div>
+                            <h5 class="card-title text-center fw-bold">Earn</h5>
+                            <p class="card-text text-center text-muted">Start
+                                earning from every download</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Notes Section -->
+    <section id="notes" class="py-5">
+        <div class="container">
+            <h2 class="section-title text-center">Featured Study Notes</h2>
+            <p class="section-subtitle text-center">Handpicked notes from
+                top performers</p>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="note-card">
+                        <div class="position-relative">
+                            <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&h=200&q=80"
+                                alt="Computer Science Notes" class="card-img-top">
+                            <div class="price-tag">FREE</div>
+                        </div>
+                        <div class="p-4">
+                            <h5 class="card-title fw-bold">Advanced
+                                Algorithms - Complete Guide</h5>
+                            <p class="text-muted mb-2">Stanford University •
+                                Computer Science</p>
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                    <span class="text-muted ms-1">(128)</span>
+                                </div>
+                                <span class="badge bg-light text-dark">Fall
+                                    2023</span>
+                            </div>
+                            <p class="card-text">Comprehensive notes
+                                covering all major algorithms with examples
+                                and practice problems.</p>
+                            <button class="download-btn" onclick="downloadNote('free-algorithms')">
+                                <i class="fas fa-download me-2"></i>Download
+                                Free
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="note-card">
+                        <div class="position-relative">
+                            <img src="https://images.unsplash.com/photo-1605966275838-97801c41055a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&h=200&q=80"
+                                alt="Chemistry Notes" class="card-img-top">
+                            <div class="price-tag paid">$4.99</div>
+                        </div>
+                        <div class="p-4">
+                            <h5 class="card-title fw-bold">Organic Chemistry
+                                - Reaction Mechanisms</h5>
+                            <p class="text-muted mb-2">MIT • Chemistry</p>
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <span class="text-muted ms-1">(95)</span>
+                                </div>
+                                <span class="badge bg-light text-dark">Spring
+                                    2023</span>
+                            </div>
+                            <p class="card-text">Detailed reaction
+                                mechanisms with step-by-step explanations
+                                and practice questions.</p>
+                            <button class="download-btn paid" onclick="downloadNote('paid-chemistry')">
+                                <i class="fas fa-lock me-2"></i>Buy &
+                                Download
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="note-card">
+                        <div class="position-relative">
+                            <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&h=200&q=80"
+                                alt="Business Notes" class="card-img-top">
+                            <div class="price-tag">FREE</div>
+                        </div>
+                        <div class="p-4">
+                            <h5 class="card-title fw-bold">Corporate Finance
+                                - Valuation Methods</h5>
+                            <p class="text-muted mb-2">Harvard Business
+                                School • Finance</p>
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                    <span class="text-muted ms-1">(76)</span>
+                                </div>
+                                <span class="badge bg-light text-dark">Fall
+                                    2023</span>
+                            </div>
+                            <p class="card-text">Complete guide to company
+                                valuation techniques with real-world
+                                examples.</p>
+                            <button class="download-btn" onclick="downloadNote('free-finance')">
+                                <i class="fas fa-download me-2"></i>Download
+                                Free
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="note-card">
+                        <div class="position-relative">
+                            <img src="https://images.unsplash.com/photo-1635805737707-575885ab0820?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&h=200&q=80"
+                                alt="Math Notes" class="card-img-top">
+                            <div class="price-tag paid">$3.99</div>
+                        </div>
+                        <div class="p-4">
+                            <h5 class="card-title fw-bold">Calculus II -
+                                Integration Techniques</h5>
+                            <p class="text-muted mb-2">UC Berkeley •
+                                Mathematics</p>
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                    <span class="text-muted ms-1">(142)</span>
+                                </div>
+                                <span class="badge bg-light text-dark">Spring
+                                    2023</span>
+                            </div>
+                            <p class="card-text">Master integration with
+                                substitution, parts, and partial fractions
+                                techniques.</p>
+                            <button class="download-btn paid" onclick="downloadNote('paid-calculus')">
+                                <i class="fas fa-lock me-2"></i>Buy &
+                                Download
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="note-card">
+                        <div class="position-relative">
+                            <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&h=200&q=80"
+                                alt="Psychology Notes" class="card-img-top">
+                            <div class="price-tag">FREE</div>
+                        </div>
+                        <div class="p-4">
+                            <h5 class="card-title fw-bold">Cognitive
+                                Psychology - Memory & Learning</h5>
+                            <p class="text-muted mb-2">Yale University •
+                                Psychology</p>
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <span class="text-muted ms-1">(89)</span>
+                                </div>
+                                <span class="badge bg-light text-dark">Fall
+                                    2023</span>
+                            </div>
+                            <p class="card-text">Comprehensive notes on
+                                memory formation, retention, and learning
+                                theories.</p>
+                            <button class="download-btn" onclick="downloadNote('free-psychology')">
+                                <i class="fas fa-download me-2"></i>Download
+                                Free
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="note-card">
+                        <div class="position-relative">
+                            <img src="https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&h=200&q=80"
+                                alt="Engineering Notes" class="card-img-top">
+                            <div class="price-tag paid">$5.99</div>
+                        </div>
+                        <div class="p-4">
+                            <h5 class="card-title fw-bold">Thermodynamics -
+                                Heat Transfer</h5>
+                            <p class="text-muted mb-2">Caltech • Mechanical
+                                Engineering</p>
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <span class="text-muted ms-1">(115)</span>
+                                </div>
+                                <span class="badge bg-light text-dark">Spring
+                                    2023</span>
+                            </div>
+                            <p class="card-text">Detailed notes on heat
+                                transfer mechanisms with solved
+                                examples.</p>
+                            <button class="download-btn paid" onclick="downloadNote('paid-engineering')">
+                                <i class="fas fa-lock me-2"></i>Buy &
+                                Download
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Testimonials -->
+    <section id="testimonials" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title text-center">What Students Say</h2>
+            <p class="section-subtitle text-center">Real stories from real
+                students</p>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="testimonial-card">
+                        <div class="d-flex mb-3">
+                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=60&h=60&q=80"
+                                alt="Sarah Chen" class="rounded-circle me-3" width="60" height="60">
+                            <div>
+                                <h6 class="mb-0">Sarah Chen</h6>
+                                <small class="text-muted">Stanford
+                                    University</small>
+                            </div>
+                        </div>
+                        <div class="rating mb-2">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="mb-0">"Found the perfect notes for my Organic Chemistry exam. Scored an A+ thanks to
+                            StudyHub!"</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="testimonial-card">
+                        <div class="d-flex mb-3">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=60&h=60&q=80"
+                                alt="Marcus Johnson" class="rounded-circle me-3" width="60" height="60">
+                            <div>
+                                <h6 class="mb-0">Marcus Johnson</h6>
+                                <small class="text-muted">MIT</small>
+                            </div>
+                        </div>
+                        <div class="rating mb-2">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="mb-0">"Earned $500 last semester by uploading my Computer Science notes. Easy money!"
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="testimonial-card">
+                        <div class="d-flex mb-3">
+                            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=60&h=60&q=80"
+                                alt="Emily Rodriguez" class="rounded-circle me-3" width="60" height="60">
+                            <div>
+                                <h6 class="mb-0">Emily Rodriguez</h6>
+                                <small class="text-muted">UC
+                                    Berkeley</small>
+                            </div>
+                        </div>
+                        <div class="rating mb-2">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="mb-0">"The quality is amazing. These notes saved me countless hours of studying."</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- FAQ -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title text-center">Frequently Asked
+                Questions</h2>
+            <p class="section-subtitle text-center">Everything you need to
+                know about StudyHub</p>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="accordion" id="faqAccordion">
+                        <div class="accordion-item faq-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button fw-bold" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#faq1">
+                                    How do I know the notes are high
+                                    quality?
+                                </button>
+                            </h2>
+                            <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    All notes are created by academic
+                                    toppers and go through our quality
+                                    verification process. We also have
+                                    student ratings and reviews to help you
+                                    make informed decisions.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item faq-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button fw-bold collapsed" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#faq2">
+                                    How much can I earn by selling notes?
+                                </button>
+                            </h2>
+                            <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Earnings vary based on demand and
+                                    quality. Top sellers earn $200-800 per
+                                    month on average. You earn 70% of each
+                                    sale, with payments processed monthly.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item faq-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button fw-bold collapsed" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#faq3">
+                                    What payment methods do you accept?
+                                </button>
+                            </h2>
+                            <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    We accept all major credit cards,
+                                    PayPal, and bank transfers for sellers.
+                                    Payments to sellers are processed via
+                                    PayPal or direct bank transfer.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item faq-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button fw-bold collapsed" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#faq4">
+                                    Can I get a refund if I'm not satisfied?
+                                </button>
+                            </h2>
+                            <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Yes, we offer a 48-hour money-back
+                                    guarantee on all purchases. If you're
+                                    not satisfied with your purchase, simply
+                                    contact our support team for a full
+                                    refund.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h4 class="text-white mb-4">
+                        <i class="fas fa-book-open me-2"></i>StudyHub
+                    </h4>
+                    <p class="text-light">The premier platform for college
+                        students to buy, sell, and download high-quality
+                        study notes from top performers.</p>
+                    <div class="mt-4">
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 mb-4">
+                    <h5 class="text-white mb-4">Product</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#features" class="text-light text-decoration-none">Features</a></li>
+                        <!-- <li class="mb-2"><a href="#"
+                                    class="text-light text-decoration-none">Pricing</a></li> -->
+                        <li class="mb-2"><a href="#how-it-works" class="text-light text-decoration-none">How
+                                It Works</a></li>
+                        <li class="mb-2"><a href="#testimonials"
+                                class="text-light text-decoration-none">Testimonials</a></li>
+                    </ul>
+                </div>
+                <!-- <div class="col-lg-2 col-md-4 mb-4">
+                        <h5 class="text-white mb-4">Company</h5>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><a href="#"
+                                    class="text-light text-decoration-none">About
+                                    Us</a></li>
+                            <li class="mb-2"><a href="#"
+                                    class="text-light text-decoration-none">Careers</a></li>
+                            <li class="mb-2"><a href="#"
+                                    class="text-light text-decoration-none">Contact</a></li>
+                            <li class="mb-2"><a href="#"
+                                    class="text-light text-decoration-none">Blog</a></li>
+                        </ul>
+                    </div> -->
+                <div class="col-lg-2 col-md-4 mb-4">
+                    <h5 class="text-white mb-4">Support</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-light text-decoration-none">Help
+                                Center</a></li>
+                        <li class="mb-2"><a href="#" class="text-light text-decoration-none">Community</a></li>
+                        <li class="mb-2"><a href="#" class="text-light text-decoration-none">Privacy
+                                Policy</a></li>
+                        <li class="mb-2"><a href="#" class="text-light text-decoration-none">Terms
+                                of Service</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-2 col-md-4 mb-4">
+                    <h5 class="text-white mb-4">Download App</h5>
+                    <div class="mb-2">
+                        <a href="#" class="d-block mb-2">
+                            <img src="https://placehold.co/120x40/ffffff/000000?text=App+Store" alt="App Store"
+                                class="img-fluid">
+                        </a>
+                    </div>
+                    <div>
+                        <a href="#" class="d-block">
+                            <img src="https://placehold.co/120x40/ffffff/000000?text=Google+Play" alt="Google Play"
+                                class="img-fluid">
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <hr class="my-4 bg-secondary">
+            <div class="row pb-4">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="text-light mb-0">&copy; 2025 StudyHub. All
+                        rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <a href="#" class="text-light text-decoration-none me-3">Privacy
+                        Policy</a>
+                    <a href="#" class="text-light text-decoration-none me-3">Terms
+                        of Service</a>
+                    <a href="#" class="text-light text-decoration-none">Cookie
+                        Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function () {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('navbar-scrolled');
+            } else {
+                navbar.classList.remove('navbar-scrolled');
+            }
+        });
+        // Tab switching for how it works
+        function switchTab(tab) {
+            // Update button states
+            document.getElementById('buyers-tab').classList.remove('active-tab');
+            document.getElementById('sellers-tab').classList.remove('active-tab');
+            if (tab === 'buyers') {
+                document.getElementById('buyers-tab').classList.add('active-tab');
+                document.getElementById('buyers-content').style.display = 'block';
+                document.getElementById('sellers-content').style.display = 'none';
+            } else {
+                document.getElementById('sellers-tab').classList.add('active-tab');
+                document.getElementById('buyers-content').style.display = 'none';
+                document.getElementById('sellers-content').style.display = 'block';
+            }
+        }
+        // Download note function
+        function downloadNote(noteId) {
+            if (noteId.startsWith('free')) {
+                // Simulate free download
+                alert('Downloading free note...');
+                // In a real implementation, this would trigger the actual download
+            } else {
+                // Simulate paid download
+                alert('Redirecting to payment page for paid note...');
+                // In a real implementation, this would redirect to a payment page
+            }
+        }
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                // If href is just "#", don't scroll
+                if (this.getAttribute('href') === '#') {
+                    return;
+                }
+
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
